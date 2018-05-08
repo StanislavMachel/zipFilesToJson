@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ZipFilesToJson.Common;
 
-namespace ControlPanel.Web
+namespace DataManagementSystem.Web
 {
     public class Startup
     {
@@ -27,8 +27,8 @@ namespace ControlPanel.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddScoped<IZipFileToTreeService, ZipFileToTreeService>();
-            services.AddScoped<IEncrypter, Aes128BitEcbMode>();
+         
+            //services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,14 +43,11 @@ namespace ControlPanel.Web
                 app.UseHsts();
             }
 
+            //app.UseCors(builder =>
+            //    builder.WithOrigins("https://localhost:44362"));
+
             app.UseHttpsRedirection();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}"
-                );
-            });
+            app.UseMvc();
         }
     }
 }

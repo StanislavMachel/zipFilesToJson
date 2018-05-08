@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Compression;
+﻿using System.IO.Compression;
 using System.Linq;
-using System.Threading.Tasks;
-using ControlPanel.Web.Entities;
 using Microsoft.AspNetCore.Http;
+using ZipFilesToJson.Common;
 
 namespace ControlPanel.Web
 {
     public class ZipFileToTreeService : IZipFileToTreeService
     {
+        private readonly IEncrypter _encrypter;
+
+        public ZipFileToTreeService(IEncrypter encrypter)
+        {
+            _encrypter = encrypter;
+        }
         public TreeItem ToTreeItem(IFormFile formFile)
         {
+
             TreeItem root = null;
 
             using (var stream = formFile.OpenReadStream())
