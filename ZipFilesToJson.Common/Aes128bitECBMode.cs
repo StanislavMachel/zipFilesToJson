@@ -28,29 +28,9 @@ namespace ZipFilesToJson.Common
 
             var hex = _configuration.GetSection("AppConfiguration")["AesKey"];
 
-            if (string.IsNullOrEmpty(hex))
-            {
-                throw new ArgumentException("AppConfiguration.AesKey must be specified");
-            }
-
-            if (hex.Length % 2 != 0)
-            {
-                throw new ArgumentException(String.Format(CultureInfo.InvariantCulture,
-                    "The binary key cannot have an odd number of digits: {0}", hex));
-            }
-
-            byte[] hexAsBytes = new byte[hex.Length / 2];
-            for (int index = 0; index < hexAsBytes.Length; index++)
-            {
-                string byteValue = hex.Substring(index * 2, 2);
-                hexAsBytes[index] = byte.Parse(byteValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
-            }
-
-            aesManaged.Key = hexAsBytes;
+            aesManaged.Key = HexToByteArrayConverter.Convert(hex);
             return aesManaged;
         }
-
-
 
         public byte[] Encrypt(string plainText)
         {

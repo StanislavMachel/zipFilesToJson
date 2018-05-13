@@ -1,28 +1,23 @@
 ﻿using System.IO.Compression;
 using System.Linq;
+using ControlPanel.Web.Interfaces;
 using Microsoft.AspNetCore.Http;
 using ZipFilesToJson.Common;
 
-namespace ControlPanel.Web
+namespace ControlPanel.Web.Services
 {
     public class ZipFileToTreeService : IZipFileToTreeService
     {
-        private readonly IEncrypter _encrypter;
-
-        public ZipFileToTreeService(IEncrypter encrypter)
-        {
-            _encrypter = encrypter;
-        }
         public TreeItem ToTreeItem(IFormFile formFile)
         {
 
-            TreeItem root = null;
+            TreeItem root;
 
             using (var stream = formFile.OpenReadStream())
             {
                 using (ZipArchive archive = new ZipArchive(stream))
                 {
-                    root = new TreeItem("", formFile.FileName, "root");
+                    root = new TreeItem("", formFile.FileName, "archive");
 
                     var entries = archive.Entries
                         .Select(x => x.FullName.Substring(0, x.FullName.Length - x.Name.Length))

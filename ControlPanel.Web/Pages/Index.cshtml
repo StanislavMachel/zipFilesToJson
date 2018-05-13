@@ -1,11 +1,19 @@
 ﻿@page
-@model ControlPanel.Web.IndexModel
+@using ControlPanel.Web.Pages
+@model ControlPanel.Web.Pages.IndexModel
 @{
 }
 
-<h1>Upload Zip files</h1>
+<h1 style="color: red;">@TempData["Message"]</h1>
+<h2>Upload Zip files</h2>
 <form method="post" enctype="multipart/form-data" action="@Url.RouteUrl("UploadZipFiles")">
-    <input type="file" name="zipFile" accept=".zip" />
+    <input type="text" name="username" required value="admin"/>
+    <br/>
+    <input type="password" name="password" required value="pa$$w0rd"/>
+    <br/>
+    <input type="file" name="zipFile" accept=".zip" required/>
     <br/>
     <input type="submit" name="Upload"/>
 </form>
+
+<p><b>NB!</b>Here inserted prefilled right user name and password. You can change it for test.</p>

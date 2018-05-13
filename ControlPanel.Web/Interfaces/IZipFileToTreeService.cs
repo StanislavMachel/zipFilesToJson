@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using ZipFilesToJson.Common;
 
-namespace ControlPanel.Web
+namespace ControlPanel.Web.Interfaces
 {
     public interface IZipFileToTreeService
     {

@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataManagementSystem.Web.Data;
+using DataManagementSystem.Web.Interfaces;
+using DataManagementSystem.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,9 +30,12 @@ namespace DataManagementSystem.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataManagmentSystemContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection")));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-         
-            //services.AddCors();
+
+            services.AddScoped<IStoreZipFileStructureService, StoreZipFileStructureService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
