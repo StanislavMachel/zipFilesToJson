@@ -34,7 +34,7 @@ namespace DataManagementSystem.Web.Controllers
 
             if (!IsAutificated(authorization))
             {
-                return StatusCode(HttpStatusCode.Forbidden);
+                return StatusCode((int)HttpStatusCode.Forbidden);
             }
 
             _zipFileStructureService.StoreToDataBase(treeItem);
