@@ -1,0 +1,11 @@
+﻿@page
+@model ControlPanel.Web.IndexModel
+@{
+}
+
+<h1>Upload Zip files</h1>
+<form method="post" enctype="multipart/form-data" action="@Url.RouteUrl("UploadZipFiles")">
+    <input type="file" name="zipFile" accept=".zip" />
+    <br/>
+    <input type="submit" name="Upload"/>
+</form>
