@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Compression;
+﻿using System.IO.Compression;
 using System.Linq;
-using System.Threading.Tasks;
-using ControlPanel.Web.Entities;
+using ControlPanel.Web.Interfaces;
 using Microsoft.AspNetCore.Http;
+using ZipFilesToJson.Common;
 
-namespace ControlPanel.Web
+namespace ControlPanel.Web.Services
 {
     public class ZipFileToTreeService : IZipFileToTreeService
     {
         public TreeItem ToTreeItem(IFormFile formFile)
         {
-            TreeItem root = null;
+
+            TreeItem root;
 
             using (var stream = formFile.OpenReadStream())
             {
                 using (ZipArchive archive = new ZipArchive(stream))
                 {
-                    root = new TreeItem("", formFile.FileName, "root");
+                    root = new TreeItem("", formFile.FileName, "archive");
 
                     var entries = archive.Entries
                         .Select(x => x.FullName.Substring(0, x.FullName.Length - x.Name.Length))

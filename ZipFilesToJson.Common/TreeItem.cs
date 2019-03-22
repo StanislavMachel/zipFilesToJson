@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace ControlPanel.Web.Entities
+namespace ZipFilesToJson.Common
 {
     public class TreeItem
     {
