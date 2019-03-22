@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
+﻿using System.IO;
 using System.Security.Cryptography;
-using System.Text;
 using Microsoft.Extensions.Configuration;
 
 namespace ZipFilesToJson.Common
